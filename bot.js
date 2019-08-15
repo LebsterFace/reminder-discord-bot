@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
+//TEST!
+
 var reminders,waitDate,message,discordMsg;
 client.on("ready", () => {
   console.log("Bot started!");
@@ -29,7 +31,7 @@ function calcTime(time,scale) {
 }
 
 client.on("message", message => {
-  if (message.content==".rb") {message.channel.send("Version: 1.5.1\nNext Verion Additions:\n` - Repeating Reminders\n - AM/PM Support\n - Colon support\n - Custom Timespans`  ");return;}
+  if (message.content==".rb") {message.channel.send("Version: 1.5.1.1\nNext Verion Additions:\n` - Repeating Reminders\n - AM/PM Support\n - Colon support\n - Custom Timespans`  ");return;}
   if (message.author.bot) return;
   const args = message.content.trim().split(/ +/g);
   if (args.length>1||message.content.match(/[0123456789]/gi)!=null) {
@@ -52,4 +54,4 @@ client.on("message", message => {
 });
 
 
-client.login("NjExMzYxMTM0NjU3NjY3MDc1.XVWzCQ.kZvPpw1F0VnT3CqjRlw8JHvzpvQ");
+client.login(process.env.BOT_TOKEN);
