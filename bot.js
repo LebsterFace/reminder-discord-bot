@@ -34,15 +34,15 @@ client.on("message", message => {
   if (message.content==".rb") {message.channel.send("Version: 1.5.1.1\nNext Verion Additions:\n` - Repeating Reminders\n - AM/PM Support\n - Colon support\n - Custom Timespans`  ");return;}
   if (message.author.bot) return;
   const args = message.content.trim().split(/ +/g);
-  if (args.length>1||message.content.match(/[0123456789]/gi)!=null) {
+  if (args.length>1&&message.content.match(/[0123456789]/gi)!=null) {
     discordMsg=message;
     var waitDate,
     	message=[],
       readingMessage=false;
     args.forEach(function(me) {
-    	if (me.match(/[0123456789]/gi)==null||readingMessage){message.push(me);readingMessage=true;}else{
-        let timescale = me.split(/([0123456789]+)/gi)[2],
-    		time = Number(me.split(/([0123456789]+)/gi)[1]);
+    	if (me.match(/[0-9]/gi)==null||readingMessage){message.push(me);readingMessage=true;}else{
+        let timescale = me.split(/([0-9]+)/gi)[2],
+    		time = Number(me.split(/([0-9]+)/gi)[1]);
     	let currentDate = (new Date()-0);
     	waitDate = currentDate+calcTime(time,timescale);
     }});
