@@ -49,7 +49,7 @@ client.on("message", message => {
     reminders.push({remindDate: waitDate, message: message.join(" "), discordMsg: discordMsg});
 	discordMsg.channel.send("Ok, I'll remind you!");
   } else {
-    message.channel.send("**Usage**:\n`<time> <message> [repeat?]\n\n**Timescales:**\n\nSeconds: s, sec(s), second(s)\nMinutes: m, min(s), minute(s)\nHours: h, hour(s)\nDays: d, day(s)\n`");
+    message.channel.send("**Usage**:\n`<time> <message> [repeat?]\n\nTimescales:\n\nSeconds: s, sec(s), second(s)\nMinutes: m, min(s), minute(s)\nHours: h, hour(s)\nDays: d, day(s)\n`");
   }
 });
 
