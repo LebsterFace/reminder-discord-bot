@@ -19,30 +19,31 @@ String.prototype.isMatch = function(s){
    return this.match(s)!==null
 }
 
-function calcTime(time,scale) {
+function calcTime(time,scale,me) {
     if (scale.isMatch(/^s/gi)){return(time*1000)}else
     if (scale.isMatch(/^m/gi)){return(time*60000)}else
     if (scale.isMatch(/^h/gi)){return(time*3600000)}else
     if (scale.isMatch(/^d/gi)){return(time*86400000)}else {
-		return(((((time.toString().substr(0,2)*3600)+(time.toString().substr(2,2)*60))*1000)-(new Date().getHours()*3600000+new Date().getMinutes()*60000+new Date().getSeconds()*1000+new Date().getMilliseconds())))
+		return(0)
 	}
 }
 
 client.on("message", message => {
-  if (message.content==".rb") {message.channel.send("Version: 1.5.1.1\nNext Verion Additions:\n`  - Repeating Reminders\n - AM/PM Support\n - Colon support\n - Custom Timespans`  ");return;}
+  if (message.content==".rb") {message.channel.send("Version: 1.5.2\nNext Verion Additions:\n`- Repeating Reminders\n- Specific Time reminders\n - Custom Timespans`  ");return;}
   if (message.author.bot) return;
   const args = message.content.trim().split(/ +/g);
   if (args.length>1&&message.content.match(/[0123456789]/gi)!=null) {
     discordMsg=message;
-    var waitDate,
+    let currentDate = (new Date()-0);
+    var waitDate = currentDate,
     	message=[],
       readingMessage=false;
     args.forEach(function(me) {
     	if (me.match(/[0-9]/gi)==null||readingMessage){message.push(me);readingMessage=true;}else{
         let timescale = me.split(/([0-9]+)/gi)[2],
     		time = Number(me.split(/([0-9]+)/gi)[1]);
-    	let currentDate = (new Date()-0);
-    	waitDate = currentDate+calcTime(time,timescale);
+    	currentDate = (new Date()-0);
+    	waitDate += calcTime(time,timescale,me);
     }});
     reminders.push({remindDate: waitDate, message: message.join(" "), discordMsg: discordMsg});
 	discordMsg.channel.send("Ok, I'll remind you!");
