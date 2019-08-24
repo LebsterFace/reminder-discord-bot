@@ -24,7 +24,7 @@ function calcTime(time,scale,me) {
     if (scale.isMatch(/^m/gi)){return(time*60000)}else
     if (scale.isMatch(/^h/gi)){return(time*3600000)}else
     if (scale.isMatch(/^d/gi)){return(time*86400000)}else {
-		return(0)
+		return(0);
 	}
 }
 
@@ -42,11 +42,10 @@ client.on("message", message => {
     	if (me.match(/[0-9]/gi)==null||readingMessage){message.push(me);readingMessage=true;}else{
         let timescale = me.split(/([0-9]+)/gi)[2],
     		time = Number(me.split(/([0-9]+)/gi)[1]);
-    	currentDate = (new Date()-0);
     	waitDate += calcTime(time,timescale,me);
     }});
     reminders.push({remindDate: waitDate, message: message.join(" "), discordMsg: discordMsg});
-	discordMsg.channel.send("Ok, I'll remind you!");
+	discordMsg.channel.send(`Reminding: \`${message}\` on \`${new Date(waitDate)}\``);
   } else {
     message.channel.send("**Usage**:\n`<time> <message> [repeat?]\n\nTimescales:\n\nSeconds: s, sec(s), second(s)\nMinutes: m, min(s), minute(s)\nHours: h, hour(s)\nDays: d, day(s)\n`");
   }
